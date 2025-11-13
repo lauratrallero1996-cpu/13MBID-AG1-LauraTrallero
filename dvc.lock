@@ -9,8 +9,8 @@ stages:
       size: 5834924
     - path: src/visualize.py
       hash: md5
-      md5: 47c5b20a1c54382a681dccd9e95e466c
-      size: 1458
+      md5: d77c0b8a8375d08a9d771abd38d99983
+      size: 1524
     outs:
     - path: reports/figures
       hash: md5
@@ -26,12 +26,12 @@ stages:
       size: 5834924
     - path: tests/test_data_quality.py
       hash: md5
-      md5: 01722f57435b2835b5b4fe9113b4d2e3
-      size: 1749
+      md5: 0cd6e7c4fa36857b724d4dc5cbf7d9a9
+      size: 1612
     outs:
     - path: reports/quality/pytest_report.txt
       hash: md5
-      md5: 1574b6b11ba070d7e80df2ba363cb8fc
+      md5: cbd0e3dc707385124e8cd05a7527cf35
       size: 134
   prepare:
     cmd: python src/prepare_data.py
@@ -42,8 +42,8 @@ stages:
       size: 5834924
     - path: src/prepare_data.py
       hash: md5
-      md5: 81978ebd920e02ff79fad6432fc2b999
-      size: 1352
+      md5: 4c04d5a36559f0f3c420f76b904dcf7b
+      size: 1179
     outs:
     - path: data/processed/bank-additional-processed.csv
       hash: md5

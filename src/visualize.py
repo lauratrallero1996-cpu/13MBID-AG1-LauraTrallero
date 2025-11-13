@@ -20,6 +20,7 @@ def main():
     plt.xlabel("Edad")
     plt.ylabel("Frecuencia")
     plt.tight_layout()
+    print("Guardando imagen en:", OUTPUT_DIR / "01_age_hist.png")
     plt.savefig(OUTPUT_DIR / "01_age_hist.png")
     plt.close()
 
