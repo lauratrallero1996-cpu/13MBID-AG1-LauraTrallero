@@ -20,3 +20,18 @@ stages:
       - data/raw/bank-additional-full.csv
     outs:
       - data/processed/bank-additional-processed.csv
+  train_model:
+    cmd: python src/train_model.py
+    deps:
+      - src/train_model.py
+      - data/processed/bank-additional-processed.csv
+    outs:
+      - models/model.pkl
+      - models/metrics.json
+
+  test_model:
+    cmd: pytest tests/test_model_performance.py
+    deps:
+      - tests/test_model_performance.py
+      - models/metrics.json
+

@@ -49,3 +49,34 @@ stages:
       hash: md5
       md5: 965d859cc62b638af3428f7810330318
       size: 3456487
+  train_model:
+    cmd: python src/train_model.py
+    deps:
+    - path: data/processed/bank-additional-processed.csv
+      hash: md5
+      md5: 965d859cc62b638af3428f7810330318
+      size: 3456487
+    - path: src/train_model.py
+      hash: md5
+      md5: 5e26ec29ce6167e09e04930a4bcff028
+      size: 4288
+    outs:
+    - path: models/metrics.json
+      hash: md5
+      md5: cffb8abb572e6d5fb5e8b2509730f930
+      size: 188
+    - path: models/model.pkl
+      hash: md5
+      md5: 8bc0378a661b69d09e6b4a9285efef7c
+      size: 372121
+  test_model:
+    cmd: pytest tests/test_model_performance.py
+    deps:
+    - path: models/metrics.json
+      hash: md5
+      md5: cffb8abb572e6d5fb5e8b2509730f930
+      size: 188
+    - path: tests/test_model_performance.py
+      hash: md5
+      md5: 956d7b82c199889508169de1a0583dd6
+      size: 795
