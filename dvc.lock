@@ -1,0 +1,51 @@
+schema: '2.0'
+stages:
+  visualize:
+    cmd: python src/visualize.py
+    deps:
+    - path: data/raw/bank-additional-full.csv
+      hash: md5
+      md5: f6cb2c1256ffe2836b36df321f46e92c
+      size: 5834924
+    - path: src/visualize.py
+      hash: md5
+      md5: 47c5b20a1c54382a681dccd9e95e466c
+      size: 1458
+    outs:
+    - path: reports/figures
+      hash: md5
+      md5: 64f4b0c0bf4167387b4eea1ec5fb440c.dir
+      size: 59450
+      nfiles: 3
+  quality:
+    cmd: pytest -q > reports/quality/pytest_report.txt
+    deps:
+    - path: data/raw/bank-additional-full.csv
+      hash: md5
+      md5: f6cb2c1256ffe2836b36df321f46e92c
+      size: 5834924
+    - path: tests/test_data_quality.py
+      hash: md5
+      md5: 01722f57435b2835b5b4fe9113b4d2e3
+      size: 1749
+    outs:
+    - path: reports/quality/pytest_report.txt
+      hash: md5
+      md5: 1574b6b11ba070d7e80df2ba363cb8fc
+      size: 134
+  prepare:
+    cmd: python src/prepare_data.py
+    deps:
+    - path: data/raw/bank-additional-full.csv
+      hash: md5
+      md5: f6cb2c1256ffe2836b36df321f46e92c
+      size: 5834924
+    - path: src/prepare_data.py
+      hash: md5
+      md5: 81978ebd920e02ff79fad6432fc2b999
+      size: 1352
+    outs:
+    - path: data/processed/bank-additional-processed.csv
+      hash: md5
+      md5: 965d859cc62b638af3428f7810330318
+      size: 3456487

@@ -1,0 +1,22 @@
+stages:
+  visualize:
+    cmd: python src/visualize.py
+    deps:
+    - data/raw/bank-additional-full.csv
+    - src/visualize.py
+    outs:
+    - reports/figures
+  quality:
+    cmd: pytest -q > reports/quality/pytest_report.txt
+    deps:
+      - data/raw/bank-additional-full.csv
+      - tests/test_data_quality.py
+    outs:
+      - reports/quality/pytest_report.txt
+  prepare:
+    cmd: python src/prepare_data.py
+    deps:
+      - src/prepare_data.py
+      - data/raw/bank-additional-full.csv
+    outs:
+      - data/processed/bank-additional-processed.csv
