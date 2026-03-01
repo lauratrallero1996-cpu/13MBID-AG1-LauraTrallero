@@ -1,0 +1,38 @@
+[
+  {
+    "model": "Logistic Regression",
+    "train_samples": 24382,
+    "test_samples": 6096,
+    "test_accuracy": 0.8895997375328084,
+    "test_precision": 0.610738255033557,
+    "test_recall": 0.3536269430051813,
+    "test_f1": 0.4479081214109926
+  },
+  {
+    "model": "Linear SVC",
+    "train_samples": 24382,
+    "test_samples": 6096,
+    "test_accuracy": 0.8843503937007874,
+    "test_precision": 0.6043613707165109,
+    "test_recall": 0.25129533678756477,
+    "test_f1": 0.3549862763037511
+  },
+  {
+    "model": "KNN (k=5)",
+    "train_samples": 24382,
+    "test_samples": 6096,
+    "test_accuracy": 0.885990813648294,
+    "test_precision": 0.5562043795620438,
+    "test_recall": 0.49352331606217614,
+    "test_f1": 0.5229924502402197
+  },
+  {
+    "model": "Decision Tree",
+    "train_samples": 24382,
+    "test_samples": 6096,
+    "test_accuracy": 0.8741797900262467,
+    "test_precision": 0.5031605562579013,
+    "test_recall": 0.5155440414507773,
+    "test_f1": 0.509277031349968
+  }
+]

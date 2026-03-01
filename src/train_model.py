@@ -12,17 +12,12 @@ from sklearn.tree import DecisionTreeClassifier
 
 
 def main():
-    # =========================================================
-    # 1. Cargar datos procesados
-    # =========================================================
+
     df = pd.read_csv(
         "data/processed/bank-additional-processed.csv",
-        sep=";"  # el fichero va separado por ;
+        sep=";"  
     )
 
-    # ---------------------------------------------------------
-    # Detectar automáticamente la columna objetivo
-    # ---------------------------------------------------------
     possible_targets = ["y", "y_yes", "target", "objetivo", "target_y"]
     target_col = None
     for col in possible_targets:
@@ -37,19 +32,14 @@ def main():
 
     print(f"Usando la columna objetivo: {target_col}")
 
-    # =========================================================
-    # 2. Separar X e y y convertir tipos
-    # =========================================================
-    # y: convertimos a 0/1 si viene como 'yes'/'no'
     y_raw = df[target_col]
 
     if y_raw.dtype == object:
-        # normalizamos a minúsculas por si acaso
         y = (y_raw.str.lower() == "yes").astype(int)
     else:
         y = y_raw.astype(int)
 
-    # X: SOLO las columnas que usará el MVP (API + Streamlit)
+
     feature_columns = [
         "age",
         "campaign",
@@ -62,19 +52,15 @@ def main():
         "nr.employed",
     ]
 
-    # comprobamos que existen todas las columnas requeridas
     missing = [c for c in feature_columns if c not in df.columns]
     if missing:
         raise ValueError(f"Faltan columnas en el dataset: {missing}")
 
     X = df[feature_columns].copy()
 
-    # por seguridad, nos aseguramos de que todo es numérico
     X = X.replace([np.inf, -np.inf], np.nan).fillna(0)
 
-    # =========================================================
-    # 3. Dividir datos
-    # =========================================================
+    
     X_train, X_test, y_train, y_test = train_test_split(
         X,
         y,
@@ -83,9 +69,7 @@ def main():
         stratify=y,
     )
 
-    # =========================================================
-    # 4. Definir y entrenar modelo
-    # =========================================================
+    
     params = {
         "criterion": "gini",
         "max_depth": None,
@@ -93,9 +77,7 @@ def main():
     }
     clf = DecisionTreeClassifier(**params)
 
-    # =========================================================
-    # 5. Registrar con MLflow
-    # =========================================================
+    
     mlflow.set_experiment("bank_marketing_models")
 
     with mlflow.start_run(run_name="decision_tree_mvp"):
@@ -119,9 +101,7 @@ def main():
 
         mlflow.sklearn.log_model(clf, "model")
 
-        # =====================================================
-        # 6. Guardar modelo y métricas en disco
-        # =====================================================
+        
         os.makedirs("models", exist_ok=True)
 
         joblib.dump(clf, "models/model.pkl")
